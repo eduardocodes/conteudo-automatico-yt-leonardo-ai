@@ -146,6 +146,15 @@ const mergedData = items;
 const data1 = mergedData[0].json;
 const data2 = mergedData.length > 1 ? mergedData[1].json : {};
 
+let historiaCompleta = "";
+
+for (const item of mergedData) {
+  if (item.json["História"]) {
+    historiaCompleta = item.json["História"];
+    break;
+  }
+}
+
 const cenasPromptsJsonString = data1["Cenas Prompts JSON"] || "";
 const historiaArray = data1["Histórias"] || [];
 
@@ -155,7 +164,7 @@ const historia = historiaArray.map(item => item.value).join("\n");
 const prompt = `
   ${cenasPromptsJson}
 
-  ${historia}
+  ${historiaCompleta}
 `;
 
 return [
